@@ -1,4 +1,20 @@
 -- plugin keymap is in the plugins foler in the plugin conf
+local function term_toggle()
+    local is_terminal = vim.bo.buftype == "terminal";
+    if is_terminal then
+        vim.api.nvim_buf_delete(0, {force = true})
+    else
+        local buffers = vim.api.nvim_list_bufs();
+        vim.print(buffers)
+        for _, buf in ipairs(buffers) do
+            if vim.bo[buf].buftype == "terminal" then
+                vim.api.nvim_set_current_buf(buf);
+                return
+            end
+        end
+        vim.cmd[[term]]
+    end
+end
 
 vim.keymap.set('n', "<Esc>", "<cmd>nohlsearch<CR>") -- remove search highlighting
 vim.keymap.set('n', "<cr>", "<cr>zzzv")
@@ -18,7 +34,7 @@ vim.keymap.set('n', "<leader>m", "<cmd>marks<enter>")
 vim.keymap.set('n', "<leader>M", "<cmd>marks 'ABCDEFGHIJKLMNOPQRSTUVXYZ<cr>")
 vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n>")
 vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n>")
-vim.keymap.set('n', "<leader>t", "<cmd>term<cr>A")
+vim.keymap.set('n', "<leader>t", term_toggle)
 vim.keymap.set('n', "<leader>,", "\"\"diWo<C-R>=stdpath('config')<<CR>/<C-R>=expand('%:e')<CR>/<Esc>\"\"pA.template<Esc>")
 vim.keymap.set('n', "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set('n', "<leader>q", vim.diagnostic.setloclist)
