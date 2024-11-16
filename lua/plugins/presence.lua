@@ -1,6 +1,7 @@
 
 return {
     "andweeb/presence.nvim",
+    event="VimEnter",
     config = function ()
         require("presence").setup({
             -- General options
