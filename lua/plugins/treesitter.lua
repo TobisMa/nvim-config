@@ -22,9 +22,14 @@ return { -- Highlight, edit, and navigate code
         incremental_selection = {
             enable = true,
             keymaps = {
-                init_selection = "<C-space>",
-                node_incremental = "<C-Space>",
-                node_decremental = "<C-S-Space>",
+                -- IME problems, but space seems more intuitive
+                -- init_selection = "<C-space>",
+                -- node_incremental = "<C-Space>",
+                -- node_decremental = "<C-S-Space>",
+                -- scope_incremental = "<C-s>"
+                init_selection = "<leader>.",
+                node_incremental = "<leader>.",
+                node_decremental = "<leader>,",
                 scope_incremental = "<C-s>"
             }
         },
