@@ -44,6 +44,8 @@ vim.keymap.set('n', "<leader>T", function () term_toggle(true) end)
 vim.keymap.set('n', "<leader>,", "\"\"diWo<C-R>=stdpath('config')<<CR>/<C-R>=expand('%:e')<CR>/<Esc>\"\"pA.template<Esc>")
 vim.keymap.set('n', "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set('n', "<leader>q", vim.diagnostic.setloclist)
+vim.keymap.set({'n', 'v'}, "<leader>j", "<cmd>m .+1<cr>")
+vim.keymap.set({'n', 'v'}, "<leader>k", "<cmd>m .-2<cr>")
 
 
 -- local remove_trailing_spaces_command = "mfkVgg<cmd>keeppatterns '<,'>s/\\s\\+$//e<cr>'fjVG<cmd>keeppatterns '<,'>s/\\s\\+$//e<cr>'f<cmd>echo \"Removed trailing spaces\"<cr>"
