@@ -1,9 +1,9 @@
 function map(mode, key, execute)
-	vim.keymap.set(mode, key, execute)
+    vim.keymap.set(mode, key, execute)
 end
 
 function nmap(key, execute)
-	vim.keymap.set('n', key, execute)
+    vim.keymap.set('n', key, execute)
 end
 
 function center_movement(key)
@@ -11,26 +11,26 @@ function center_movement(key)
 end
 
 function vmap(key, execute)
-	vim.keymap.set('x', key, execute) -- as x is strictly visual mode and v ist select AND visual mode
+    vim.keymap.set('x', key, execute) -- as x is strictly visual mode and v ist select AND visual mode
 end
 
 function nvmap(key, execute)
-    vim.keymap.set({'n', 'v'}, key, execute)
+    vim.keymap.set({ 'n', 'v' }, key, execute)
 end
 
 function imap(key, execute)
-	vim.keymap.set('i', key, execute)
+    vim.keymap.set('i', key, execute)
 end
 
 function tmap(key, execute)
-	vim.keymap.set('t', key, execute)
+    vim.keymap.set('t', key, execute)
 end
 
 -- START using vim integrated stuff
 -- START normal mode
 nmap("<leader>o", "<cmd>update<cr><cmd>source<cr>") -- source config
-nmap("<esc>", "<cmd>nohlsearch<CR>") -- remove search highlighting
-nmap("<leader>v", "ggVG") -- select whole file in visual line
+nmap("<esc>", "<cmd>nohlsearch<CR>")                -- remove search highlighting
+nmap("<leader>v", "ggVG")                           -- select whole file in visual line
 nmap("<leader>k", "<cmd>m .-2<cr>")
 nmap("<leader>j", "<cmd>m .+1<cr>")
 nmap("x", "\"_x")
@@ -60,14 +60,14 @@ vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 -- END visual mode
 
 -- START insert mode
-vim.cmd[[
-function! CleverTab()                                                                           
-    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'                                         
-        return "\<Tab>"                                                                           
-    else                                                                                         
-        return "\<C-N>"                                                                           
-    endif                                                                                        
-endfunction                                                                                     
+vim.cmd [[
+function! CleverTab()
+    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
+        return "\<Tab>"
+    else
+        return "\<C-N>"
+    endif
+endfunction
 inoremap <Tab> <C-R>=CleverTab()<CR>
 inoremap <S-Tab> <C-P>
 ]]
@@ -75,6 +75,7 @@ inoremap <S-Tab> <C-P>
 
 -- START normalvisual mode
 nvmap("<leader>r", "<cmd>make<cr>")
+
 -- END normalvisual mode
 
 -- START integrated terminal
@@ -83,7 +84,7 @@ local function term_toggle(close)
     local is_terminal = vim.bo.buftype == "terminal";
     if is_terminal then
         if close then
-            vim.api.nvim_buf_delete(0, {force = true})
+            vim.api.nvim_buf_delete(0, { force = true })
         else
             vim.cmd([[b #]])
         end
@@ -96,14 +97,25 @@ local function term_toggle(close)
                 return
             end
         end
-        vim.cmd[[term]]
+        vim.cmd [[term]]
     end
 end
 
-vim.keymap.set('n', "<leader>t", function () term_toggle(false) end)
-vim.keymap.set('n', "<leader>T", function () term_toggle(true) end)
+vim.keymap.set('n', "<leader>t", function() term_toggle(false) end)
+vim.keymap.set('n', "<leader>T", function() term_toggle(true) end)
 
-vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n>") -- leave terminal insert with double esc
+vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n>")     -- leave terminal insert with double esc
 vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n>") -- leave terminal insert with double esc
 -- END integrated terminal
+
+-- START lsp keycodes
+nvmap("<leader>lf", vim.lsp.buf.format)
+nvmap("<C-.>", vim.lsp.buf.code_action)
+
+imap("<C-space>", "<C-x><C-o>")
+
+nmap("K", vim.lsp.buf.hover)
+nmap("<C-e>", vim.diagnostic.open_float)
+nmap("<C-q>", vim.diagnostic.show)
+-- END lsp keycodes
 -- END using vim integrated stuff

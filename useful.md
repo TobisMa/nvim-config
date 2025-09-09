@@ -65,3 +65,12 @@ ctrl+x: see above
 - traverse with [s and ]s
 - `z=` to get suggestions
 - `ctrl-x s` triggers suggestion completion menu in insert mode
+
+# LSP
+- grn is mapped in Normal mode to vim.lsp.buf.rename()
+- gra is mapped in Normal and Visual mode to vim.lsp.buf.code_action()
+- grr is mapped in Normal mode to vim.lsp.buf.references()
+- gri is mapped in Normal mode to vim.lsp.buf.implementation()
+- gO is mapped in Normal mode to vim.lsp.buf.document_symbol()
+- CTRL-S is mapped in Insert mode to vim.lsp.buf.signature_help()
+https://neovim.io/doc/user/news-0.11.html#_defaults

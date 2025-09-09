@@ -1,5 +1,11 @@
-options = require('options')
-keymap = require('keys')
-makes = require('make')
-lazyvim = require('lazyvim')
+--- @diagnostic disable: unused-local
+
+local options = require('options')
+local keymap = require('keys')
+local makes = require('make')
+local lazyvim = require('lazyvim')
+local colors = require('coloring')
+local lsp = require('lsp')
+
+
 

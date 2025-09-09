@@ -14,7 +14,7 @@ vim.opt.formatoptions = "r/qtnl1j"
 
 vim.opt.linebreak = true
 vim.opt.breakindent = true
-vim.opt.showbreak = ">>> "
+vim.opt.showbreak = " >> "
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 vim.opt.nrformats = "bin,hex,octal,alpha"
@@ -43,6 +43,8 @@ vim.opt.backup = false
 vim.opt.completeopt = "fuzzy,menu,menuone,noselect,popup"
 vim.opt.completeitemalign= "abbr,kind,menu"
 vim.opt.syntax = "on"
+vim.opt.pumheight = 20
+
 
 vim.opt.mps:append { '<:>', '=:;', '⟨:⟩', '⌈:⌉', '⌊:⌋', '»:«', '›:‹', '„:“', '„:”', '‚:‘', '‚:’'}
 
@@ -61,7 +63,7 @@ vim.opt.wildignore = {
 }
 
 vim.schedule(function ()
-	vim.opt.clipboard = 'unnamedplus'
+    vim.opt.clipboard = 'unnamedplus'
 end)
 
 
