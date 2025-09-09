@@ -13,11 +13,12 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         os.exit(1)
     end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     spec = {
-        { import = "plugins" }
+        { import = "plugins" },
     },
     {
         ui = {
@@ -41,7 +42,7 @@ require("lazy").setup({
             border = "single",
         },
     },
-    install = { colorscheme = { "neovim_purple" } },
+    install = { colorscheme = { "vague" } },
     checker = { enabled = true, notify=false },
     performance = {
         rtp = {
@@ -50,10 +51,12 @@ require("lazy").setup({
                 "netrwPlugin",
                 "tarPlugin",
                 "tohtml",
-                "tutor",
                 "zipPlugin"
             }
         }
     }
 })
+
+
+
 
