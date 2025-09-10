@@ -22,6 +22,7 @@ vim.opt.cursorcolumn = false
 
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.o.scrolloff = 5
 
 vim.o.showtabline = 2
 vim.o.laststatus = 2
