@@ -1,3 +1,4 @@
+--- @diagnostic disable: lowercase-global
 function map(mode, key, execute)
     vim.keymap.set(mode, key, execute)
 end
@@ -35,8 +36,10 @@ nmap("<leader>k", "<cmd>m .-2<cr>")
 nmap("<leader>j", "<cmd>m .+1<cr>")
 nmap("x", "\"_x")
 nmap("X", "\"_X")
-nmap("<leader>le", "<cmd>e #<cr>")
-nmap("<leader>ls", "<cmd>vertical sf #<cr>")
+nmap("<leader>x", "xp")
+nmap("<leader>X", "Xp")
+nmap("<leader>be","<cmd>e #<cr>")
+nmap("<leader>bs", "<cmd>vertical sf #<cr>")
 nmap("<leader>ö", "%m[%v<C-g>")
 
 -- START center movement
@@ -114,8 +117,27 @@ nvmap("<C-.>", vim.lsp.buf.code_action)
 
 imap("<C-space>", "<C-x><C-o>")
 
-nmap("K", vim.lsp.buf.hover)
-nmap("<C-e>", vim.diagnostic.open_float)
-nmap("<C-q>", vim.diagnostic.show)
+function lsp_mappings()
+    if vim.lsp.get_clients({bufnr=0}) then
+        nmap("K", vim.lsp.buf.hover)
+        nmap("<F2>", vim.lsp.buf.rename)
+        nmap("<leader>ls", vim.lsp.buf.signature_help)
+        nmap("<leader>e", vim.diagnostic.open_float)
+        nmap("<leader>lr", vim.lsp.buf.references)
+        nmap("gI", vim.lsp.buf.implementation)
+        nmap("gd", vim.lsp.buf.definition)
+        nmap("gD", vim.lsp.buf.declaration)
+
+        -- quickfix
+        nmap("<leader>q", vim.diagnostic.show)
+        nmap("<leader>qp", "<cmd>cprevious<cr>")
+        nmap("<leader>qn", "<cmd>cnext<cr>")
+
+    end
+end
 -- END lsp keycodes
+
+-- START weird mappings
+
+-- END weird mappings
 -- END using vim integrated stuff

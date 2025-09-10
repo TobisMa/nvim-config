@@ -6,6 +6,4 @@ local makes = require('make')
 local lazyvim = require('lazyvim')
 local colors = require('coloring')
 local lsp = require('lsp')
-
-
-
+local au = require('autocommands')

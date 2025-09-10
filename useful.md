@@ -12,12 +12,17 @@ ctrl-x  wait for submode for completion
     ctrl-x  cancels completion mode
 
 repeating ctrl-x after selecting a submode (e. g. ctrl-x ctrl-n ctrl-x ctrl-n) will make the match in the completion list longer
+while the completion menu is show:
+    ctrl-e ends completion and removes inserted text
+    ctrl-y confirm selected entry
+    ctrl-l insert one character to search query of the completion using the current selected entry
 
 # buffer windws
 count will refer to a number before the command e. g. `5ce` has a count of 5
 
 ctrl-w  prefix to make buffer window actions
     hjkl    move cursor around
+    p       go back to previous window
     q       close the buffer window (not the underlying buffer)
 
     r R     rotate the buffer windows (in reverse)
@@ -40,7 +45,7 @@ ctrl-w  prefix to make buffer window actions
 - :g
 - :v
 
-# useful keycodes mode keycombs 
+
 - `q:` (normal mode): opens vim cmd history which can then be edited and enter will run the edited command
 - `g<`: reopen the last commands result
 - `gx`: opens link under cursor (works on valid file paths as well) using system app
@@ -74,3 +79,10 @@ ctrl+x: see above
 - gO is mapped in Normal mode to vim.lsp.buf.document_symbol()
 - CTRL-S is mapped in Insert mode to vim.lsp.buf.signature_help()
 https://neovim.io/doc/user/news-0.11.html#_defaults
+
+# g
+`g&`  rerun last substitue command on ALL lines
+`gf`  go to file below cursor
+`gJ`  like shift+J but don't insert spaces to separate lines (J and gJ work on line selection)
+`ctrl+g`  show information about file depending on cursor position
+`ga`  print ascii and hex of character below cursor

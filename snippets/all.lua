@@ -1,9 +1,12 @@
---- @diagnostic disable: undefined-global
+-- @diagnostic disable: undefined-global
+local function pair(trig, start, e)
+    return s({trig=trig, snippetType="autosnippet"}, {t(start), i(1), t(e)})
+end
+
 
 return {
-    s({trig="(", snippetType="autosnippet"}, {t("("), i(1), t(")")}),
-    s({trig="[", snippetType="autosnippet"}, {t("["), i(1), t("]")}),
-    s({trig="{", snippetType="autosnippet"}, {t("{"), i(1), t("}")}),
-    s({trig="<", snippetType="autosnippet"}, {t("<"), i(1), t(">")}),
-    s({trig="$", snippetType="autosnippet"}, {t("$"), i(1), t("$")}),
+    pair("(", "(", ")"),
+    pair("[", "[", "]"),
+    pair("{", "{", "}"),
+    pair("<", "<", ">"),
 }
