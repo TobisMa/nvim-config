@@ -8,10 +8,12 @@ return {
 
         local function smart_expand()
             if vim.fn.pumvisible() == 0 then
-                return ls.expand_or_jump(1)
+                vim.schedule(function() ls.expand_or_jump(1) end)
+            else
+                return "<C-e>"
             end
         end
-        vim.keymap.set("i", "<C-e>", smart_expand, {silent=true, expr=true, noremap=false})
+        vim.keymap.set("i", "<C-e>", smart_expand, {silent=true, noremap=true, expr=true})
         vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(1) end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-K>", function() ls.jump(-1) end, { silent = true })
     end
