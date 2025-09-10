@@ -13,6 +13,7 @@ return {
                 return "<C-e>"
             end
         end
+
         vim.keymap.set("i", "<C-e>", smart_expand, {silent=true, noremap=true, expr=true})
         vim.keymap.set({ "i", "s" }, "<C-J>", function() ls.jump(1) end, { silent = true })
         vim.keymap.set({ "i", "s" }, "<C-K>", function() ls.jump(-1) end, { silent = true })
