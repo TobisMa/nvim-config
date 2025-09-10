@@ -40,7 +40,11 @@ nmap("<leader>x", "xp")
 nmap("<leader>X", "Xp")
 nmap("<leader>be","<cmd>e #<cr>")
 nmap("<leader>bs", "<cmd>vertical sf #<cr>")
-nmap("<leader>ö", "%m[%v<C-g>")
+nmap("<leader>bo", "<cmd>%bd|e#<cr>")
+nmap("<leader>ww", "<cmd>vsplit<cr>")
+nmap("<leader>wo", "<cmd>only<cr>zz")
+nmap("<leader>wb", "<cmd>ball<cr><C-w>=")
+nmap("<leader>ö", "<C-]>") -- follow tags
 
 -- START center movement
 center_movement("*")
@@ -127,24 +131,31 @@ nvmap("<C-.>", vim.lsp.buf.code_action)
 imap("<C-space>", "<C-x><C-o>")
 
 function lsp_mappings()
-    if vim.lsp.get_clients({bufnr=0}) then
-        nmap("K", vim.lsp.buf.hover)
-        nmap("<F2>", vim.lsp.buf.rename)
-        nmap("<leader>ls", vim.lsp.buf.signature_help)
-        nmap("<leader>e", vim.diagnostic.open_float)
-        nmap("<leader>lr", vim.lsp.buf.references)
-        nmap("gI", vim.lsp.buf.implementation)
-        nmap("gd", vim.lsp.buf.definition)
-        nmap("gD", vim.lsp.buf.declaration)
+    nmap("K", vim.lsp.buf.hover)
+    nmap("<F2>", vim.lsp.buf.rename)
+    nmap("<leader>ls", vim.lsp.buf.signature_help)
+    nmap("<leader>e", vim.diagnostic.open_float)
+    nmap("<leader>lr", vim.lsp.buf.references)
+    nmap("<leader>lt", vim.lsp.buf.type_definition)
+    nmap("<leader>lh", function () vim.lsp.buf.typehierarchy("subtypes") end)
+    nmap("<leader>lH", function () vim.lsp.buf.typehierarchy("supertypes") end)
+    nmap("gI", vim.lsp.buf.implementation)
+    nmap("gd", vim.lsp.buf.definition)
+    nmap("gD", vim.lsp.buf.declaration)
 
-        -- quickfix
-        nmap("<leader>q", vim.diagnostic.show)
-        nmap("<leader>qp", "<cmd>cprevious<cr>")
-        nmap("<leader>qn", "<cmd>cnext<cr>")
-
-    end
+    -- quickfix
+    nmap("<leader>ql", "<cmd>cwindow<cr>")
+    nmap("<leader>qP", "<cmd>cfirst<cr>")
+    nmap("<leader>qp", "<cmd>cprevious<cr>")
+    nmap("<leader>qq", "<cmd>cc<cr>")
+    nmap("<leader>qn", "<cmd>cnext<cr>")
+    nmap("<leader>qN", "<cmd>clast<cr>")
 end
 -- END lsp keycodes
+
+-- START luasnip bindings
+-- you will find them in lua/plugins/luasnip.lua#config
+-- END luasnip bindings
 
 -- START weird mappings
 
