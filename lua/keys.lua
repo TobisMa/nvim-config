@@ -63,21 +63,30 @@ vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 -- END visual mode
 
 -- START insert mode
-vim.cmd [[
-function! CleverTab()
-    if strpart( getline('.'), 0, col('.')-1 ) =~ '^\s*$'
-        return "\<Tab>"
+
+function cleverTab()
+    if vim.fn.pumvisible() ~= 0 then
+        return "<C-n>"
     else
-        return "\<C-N>"
-    endif
-endfunction
-inoremap <Tab> <C-R>=CleverTab()<CR>
-inoremap <S-Tab> <C-P>
-]]
+        return "<C-T>" -- indent
+    end
+end
+
+function cleverTabReverse()
+    if vim.fn.pumvisible() ~= 0 then
+        return "<C-p>"
+    else
+        return "<C-d>"  -- unindent
+    end
+end
+vim.keymap.set({"i"}, "<Tab>", cleverTab, {expr=true, silent=false})
+vim.keymap.set({"i"}, "<S-Tab>", cleverTabReverse, {expr=true, silent=false})
 -- END insert mode
 
 -- START normalvisual mode
 nvmap("<leader>r", "<cmd>make<cr>")
+nvmap("j", "gj")
+nvmap("k", "gk")
 
 -- END normalvisual mode
 
