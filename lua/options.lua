@@ -16,9 +16,10 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.showbreak = " >> "
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', leadmultispace= "│   "}
 vim.opt.nrformats = "bin,hex,octal,alpha"
 vim.opt.cursorcolumn = false
+vim.opt.colorcolumn = "100"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -44,6 +45,7 @@ vim.opt.backup = false
 vim.opt.completeopt = "fuzzy,menu,menuone,noselect,popup"
 vim.opt.completeitemalign= "abbr,kind,menu"
 vim.opt.syntax = "on"
+vim.cmd[[filetype plugin on]]
 vim.opt.pumheight = 20
 
 
