@@ -130,27 +130,25 @@ nvmap("<C-.>", vim.lsp.buf.code_action)
 
 imap("<C-space>", "<C-x><C-o>")
 
-function lsp_mappings()
-    nmap("K", vim.lsp.buf.hover)
-    nmap("<F2>", vim.lsp.buf.rename)
-    nmap("<leader>ls", vim.lsp.buf.signature_help)
-    nmap("<leader>e", vim.diagnostic.open_float)
-    nmap("<leader>lr", vim.lsp.buf.references)
-    nmap("<leader>lt", vim.lsp.buf.type_definition)
-    nmap("<leader>lh", function () vim.lsp.buf.typehierarchy("subtypes") end)
-    nmap("<leader>lH", function () vim.lsp.buf.typehierarchy("supertypes") end)
-    nmap("gI", vim.lsp.buf.implementation)
-    nmap("gd", vim.lsp.buf.definition)
-    nmap("gD", vim.lsp.buf.declaration)
+nmap("K", vim.lsp.buf.hover)
+nmap("<F2>", vim.lsp.buf.rename)
+nmap("<leader>ls", vim.lsp.buf.signature_help)
+nmap("<leader>e", vim.diagnostic.open_float)
+nmap("<leader>lr", vim.lsp.buf.references)
+nmap("<leader>lt", vim.lsp.buf.type_definition)
+nmap("<leader>lh", function () vim.lsp.buf.typehierarchy("subtypes") end)
+nmap("<leader>lH", function () vim.lsp.buf.typehierarchy("supertypes") end)
+nmap("gI", vim.lsp.buf.implementation)
+nmap("gd", vim.lsp.buf.definition)
+nmap("gD", vim.lsp.buf.declaration)
 
-    -- quickfix
-    nmap("<leader>ql", "<cmd>cwindow<cr>")
-    nmap("<leader>qP", "<cmd>cfirst<cr>")
-    nmap("<leader>qp", "<cmd>cprevious<cr>")
-    nmap("<leader>qq", "<cmd>cc<cr>")
-    nmap("<leader>qn", "<cmd>cnext<cr>")
-    nmap("<leader>qN", "<cmd>clast<cr>")
-end
+-- quickfix
+nmap("<leader>ql", "<cmd>cwindow<cr>")
+nmap("<leader>qP", "<cmd>cfirst<cr>")
+nmap("<leader>qp", "<cmd>cprevious<cr>")
+nmap("<leader>qq", "<cmd>cc<cr>")
+nmap("<leader>qn", "<cmd>cnext<cr>")
+nmap("<leader>qN", "<cmd>clast<cr>")
 -- END lsp keycodes
 
 -- START luasnip bindings

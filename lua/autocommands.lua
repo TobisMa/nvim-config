@@ -1,4 +1,3 @@
--- START general
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
     group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
@@ -25,13 +24,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.cmd[[normal $]]
     end,
 })
+-- vim.api.nvim_buf_set_extmark(0, vim.api.nvim_create_namespace("indent-guides"), 33, 0, {virt_text={{"│", "indent-guides"}}, virt_text_win_col=4})
+-- vim.api.nvim_buf_del_extmark(0,
 
-vim.api.nvim_create_autocmd("BufNew", {
-    desc = "load lsp keymaps",
-    group = vim.api.nvim_create_augroup("lsp-mappings", {clear=true}),
-    pattern = {"*"},
-    callback = function()
-        lsp_mappings()
-    end,
-})
--- END general
+
