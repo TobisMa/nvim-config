@@ -123,8 +123,14 @@ vim.keymap.set("i", "<esc>", ismart_escape, {expr=true})
 
 -- START normalvisual mode
 nvmap("<leader>r", "<cmd>make<cr>")
+
+-- make behaviour on wrapped lines as expected. that means those commands work for each wrapped line
+-- instead of fully jumping to the end
 nvmap("j", "gj")
 nvmap("k", "gk")
+vim.keymap.set({"n", "v"}, "0", "g0")
+vim.keymap.set({"n", "v"}, "$", "g$")
+
 -- END normalvisual mode
 
 -- START integrated terminal
