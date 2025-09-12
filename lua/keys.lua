@@ -82,6 +82,7 @@ function icleverTab()
         end
     end
 end
+vim.keymap.set("i", "<Tab>", icleverTab, {expr=true})
 
 function icleverTabReverse()
     -- go back in the completion list, or jump backwards in a snippet if possible, otherwise,
@@ -97,7 +98,6 @@ function icleverTabReverse()
         end
     end
 end
-vim.keymap.set("i", "<Tab>", icleverTab, {expr=true})
 vim.keymap.set("i", "<S-Tab>", icleverTabReverse, {expr=true})
 
 function icleverReturn()
