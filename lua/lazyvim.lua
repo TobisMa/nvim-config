@@ -54,6 +54,9 @@ require("lazy").setup({
                 "zipPlugin"
             }
         }
+    },
+    dev = {
+        path = "~/nvim-plugins"
     }
 })
 
