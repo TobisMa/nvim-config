@@ -10,7 +10,7 @@ vim.opt.wrap = true
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
-vim.opt.formatoptions = "r/qtnl1j"
+vim.opt.formatoptions = "tcrlvj1q/n"
 
 vim.opt.linebreak = true
 vim.opt.breakindent = true
@@ -20,6 +20,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', leadmultispace= "
 vim.opt.nrformats = "bin,hex,octal,alpha"
 vim.opt.cursorcolumn = false
 vim.opt.colorcolumn = "100"
+vim.opt.textwidth = 100
 
 vim.opt.number = true
 vim.opt.relativenumber = true
