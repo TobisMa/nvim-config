@@ -102,7 +102,7 @@ vim.keymap.set("i", "<S-Tab>", cleverTabReverse, {expr=true})
 
 function cleverReturn()
     -- use enter to confirm completion if completion menu is opened
-    if vim.fn.pumvisible() ~= 0 then
+    if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info()["selected"] ~= -1 then
         return "<C-y>"
     else
         return "<cr>"
