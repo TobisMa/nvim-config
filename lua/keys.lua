@@ -109,13 +109,21 @@ function cleverReturn()
     end
 end
 vim.keymap.set("i", "<return>", cleverReturn, {expr=true})
+
+function ismart_escape()
+    if vim.fn.pumvisible() ~= 0 then
+        return "<C-e>"
+    else
+        return "<esc>"
+    end
+end
+vim.keymap.set("i", "<esc>", ismart_escape, {expr=true})
 -- END insert mode
 
 -- START normalvisual mode
 nvmap("<leader>r", "<cmd>make<cr>")
 nvmap("j", "gj")
 nvmap("k", "gk")
-
 -- END normalvisual mode
 
 -- START integrated terminal
