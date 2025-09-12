@@ -76,7 +76,7 @@ function icleverTab()
     else
         local ls = require("luasnip")
         if ls.expand_or_jumpable() then
-            ls.expand_or_jump()
+            vim.schedule(function() ls.expand_or_jump(1) end)
         else
             return "<C-T>" -- indent
         end
@@ -91,7 +91,7 @@ function icleverTabReverse()
     else
         local ls = require("luasnip")
         if ls.jumpable(-1) then
-            ls.jump(-1)
+            vim.schedule(function() ls.jump(-1) end)
         else
             return "<C-d>"  -- unindent
         end
