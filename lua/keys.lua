@@ -75,7 +75,7 @@ function i_clever_tab()
         return "<C-n>"
     else
         local ls = require("luasnip")
-        if ls.expand_or_jumpable() then
+        if ls.expand_or_locally_jumpable() then
             vim.schedule(function() ls.expand_or_jump(1) end)
         else
             return "<C-T>" -- indent
@@ -91,7 +91,7 @@ function i_clever_tab_reverse()
         return "<C-p>"
     else
         local ls = require("luasnip")
-        if ls.jumpable(-1) then
+        if ls.locally_jumpable(-1) then
             vim.schedule(function() ls.jump(-1) end)
         else
             return "<C-d>"  -- unindent

@@ -19,7 +19,7 @@ return {
         vim.keymap.set({ "i", "s" }, "<C-K>", function() ls.jump(-1) end, { silent = true })
 
         -- select mode
-        vim.keymap.set("s", "<Tab>", function() ls.jump(1) end)
-        vim.keymap.set("s", "<S-Tab>", function() ls.jump(-1) end)
+        vim.keymap.set("s", "<Tab>", function() if ls.locally_jumpable(1) then ls.jump(1) end end)
+        vim.keymap.set("s", "<S-Tab>", function() if ls.locally_jumpable(-1) then ls.jump(-1) end end)
     end
 }
