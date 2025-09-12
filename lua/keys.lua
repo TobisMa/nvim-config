@@ -69,22 +69,46 @@ vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 -- START insert mode
 
 function cleverTab()
+    -- use tab to cycle through completions if possible, then try to complete the snippet  or
+    -- forwards in the snippet, otherwise indent the current line
     if vim.fn.pumvisible() ~= 0 then
         return "<C-n>"
     else
-        return "<C-T>" -- indent
+        local ls = require("luasnip")
+        if ls.expand_or_jumpable() then
+            ls.expand_or_jump()
+        else
+            return "<C-T>" -- indent
+        end
     end
 end
 
 function cleverTabReverse()
+    -- go back in the completion list, or jump backwards in a snippet if possible, otherwise,
+    -- unindent the current line
     if vim.fn.pumvisible() ~= 0 then
         return "<C-p>"
     else
-        return "<C-d>"  -- unindent
+        local ls = require("luasnip")
+        if ls.jumpable(-1) then
+            ls.jump(-1)
+        else
+            return "<C-d>"  -- unindent
+        end
     end
 end
-vim.keymap.set({"i"}, "<Tab>", cleverTab, {expr=true, silent=false})
-vim.keymap.set({"i"}, "<S-Tab>", cleverTabReverse, {expr=true, silent=false})
+vim.keymap.set("i", "<Tab>", cleverTab, {expr=true})
+vim.keymap.set("i", "<S-Tab>", cleverTabReverse, {expr=true})
+
+function cleverReturn()
+    -- use enter to confirm completion if completion menu is opened
+    if vim.fn.pumvisible() ~= 0 then
+        return "<C-y>"
+    else
+        return "<cr>"
+    end
+end
+vim.keymap.set("i", "<return>", cleverReturn, {expr=true})
 -- END insert mode
 
 -- START normalvisual mode
