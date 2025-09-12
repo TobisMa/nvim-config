@@ -11,6 +11,6 @@ return {
     pair("{", "{", "}"),
     pair("<", "<", ">"),
     pair("\"", "\"", "\""),
-    s("date", t(os.date("%d.%m.%Y"))),
+    s("date", t(os.date("%d.%m.%Y")))
 }
 

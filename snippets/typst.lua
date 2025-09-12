@@ -20,7 +20,6 @@ end
 
 return {
     pair("$", "$ ", " $", false),
-    pair("$$", "$$ ", " $$", true),
     s({ trig = "#setup", snippetType = "autosnippet" }, fmt([[
 #let important(body) = text(orange, weight: 900)[#body]
 #set text(lang: "de", size: 12pt)
