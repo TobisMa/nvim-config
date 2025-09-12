@@ -68,7 +68,7 @@ vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 
 -- START insert mode
 
-function icleverTab()
+function i_clever_tab()
     -- use tab to cycle through completions if possible, then try to complete the snippet  or
     -- forwards in the snippet, otherwise indent the current line
     if vim.fn.pumvisible() ~= 0 then
@@ -82,9 +82,9 @@ function icleverTab()
         end
     end
 end
-vim.keymap.set("i", "<Tab>", icleverTab, {expr=true})
+vim.keymap.set("i", "<Tab>", i_clever_tab, {expr=true})
 
-function icleverTabReverse()
+function i_clever_tab_reverse()
     -- go back in the completion list, or jump backwards in a snippet if possible, otherwise,
     -- unindent the current line
     if vim.fn.pumvisible() ~= 0 then
@@ -98,9 +98,9 @@ function icleverTabReverse()
         end
     end
 end
-vim.keymap.set("i", "<S-Tab>", icleverTabReverse, {expr=true})
+vim.keymap.set("i", "<S-Tab>", i_clever_tab_reverse, {expr=true})
 
-function icleverReturn()
+function i_clever_return()
     -- use enter to confirm completion if completion menu is opened
     if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info()["selected"] ~= -1 then
         return "<C-y>"
@@ -108,7 +108,7 @@ function icleverReturn()
         return "<cr>"
     end
 end
-vim.keymap.set("i", "<return>", icleverReturn, {expr=true})
+vim.keymap.set("i", "<return>", i_clever_return, {expr=true})
 
 function ismart_escape()
     -- exits completion if completion list is shown, otherwise esc
