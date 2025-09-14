@@ -12,21 +12,3 @@ vim.api.nvim_create_autocmd("LspAttach", {
 vim.diagnostic.config({
   virtual_text = true
 })
-
-function nmap(key, execute)
-    vim.keymap.set('n', key, execute)
-end
-
-function vmap(key, execute)
-    vim.keymap.set('x', key, execute) -- as x is strictly visual mode and v ist select AND visual mode
-end
-
-function nvmap(key, execute)
-    vim.keymap.set({'n', 'v'}, key, execute)
-end
-
-function imap(key, execute)
-    vim.keymap.set('i', key, execute)
-end
-
-
