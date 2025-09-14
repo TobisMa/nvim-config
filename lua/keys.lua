@@ -1,30 +1,26 @@
---- @diagnostic disable: lowercase-global
-function map(mode, key, execute)
+-- @diagnostic disable: lowercase-global
+local function map(mode, key, execute)
     vim.keymap.set(mode, key, execute)
 end
 
-function nmap(key, execute)
+local function nmap(key, execute)
     vim.keymap.set('n', key, execute)
 end
 
-function center_movement(key)
-    nmap(key, key .. 'zz')
-end
-
-function vmap(key, execute)
+local function vmap(key, execute)
     vim.keymap.set('x', key, execute) -- as x is strictly visual mode and v ist select AND visual mode
 end
 
-function nvmap(key, execute)
-    vim.keymap.set({ 'n', 'v' }, key, execute)
+local function nvmap(key, execute)
+    vim.keymap.set({'n', 'v'}, key, execute)
 end
 
-function imap(key, execute)
+local function imap(key, execute)
     vim.keymap.set('i', key, execute)
 end
 
-function tmap(key, execute)
-    vim.keymap.set('t', key, execute)
+local function center_movement(key)
+   map('n', key, key .. "zzzv")
 end
 
 -- START using vim integrated stuff
@@ -68,7 +64,7 @@ vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 
 -- START insert mode
 
-function i_clever_tab()
+local function i_clever_tab()
     -- use tab to cycle through completions if possible, then try to complete the snippet  or
     -- forwards in the snippet, otherwise indent the current line
     if vim.fn.pumvisible() ~= 0 then
@@ -84,7 +80,7 @@ function i_clever_tab()
 end
 vim.keymap.set("i", "<Tab>", i_clever_tab, {expr=true})
 
-function i_clever_tab_reverse()
+local function i_clever_tab_reverse()
     -- go back in the completion list, or jump backwards in a snippet if possible, otherwise,
     -- unindent the current line
     if vim.fn.pumvisible() ~= 0 then
@@ -100,7 +96,7 @@ function i_clever_tab_reverse()
 end
 vim.keymap.set("i", "<S-Tab>", i_clever_tab_reverse, {expr=true})
 
-function i_clever_return()
+local function i_clever_return()
     -- use enter to confirm completion if completion menu is opened
     if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info()["selected"] ~= -1 then
         return "<C-y>"
@@ -110,7 +106,7 @@ function i_clever_return()
 end
 vim.keymap.set("i", "<return>", i_clever_return, {expr=true})
 
-function ismart_escape()
+local function ismart_escape()
     -- exits completion if completion list is shown, otherwise esc
     if vim.fn.pumvisible() ~= 0 then
         return "<C-e>"
