@@ -21,6 +21,7 @@ vim.opt.nrformats = "bin,hex,octal,alpha"
 vim.opt.cursorcolumn = false
 vim.opt.colorcolumn = "100"
 vim.opt.textwidth = 100
+vim.opt.virtualedit = "block"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
