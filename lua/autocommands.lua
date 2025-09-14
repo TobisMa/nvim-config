@@ -1,3 +1,4 @@
+-- highlight text when copying/yanking
 vim.api.nvim_create_autocmd('TextYankPost', {
     desc = 'Highlight when yanking (copying) text',
     group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
@@ -6,11 +7,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
 })
 
+-- remove the highlight of the last search/replace-search when entering insert mode
 vim.api.nvim_create_autocmd("InsertEnter", {
     group = vim.api.nvim_create_augroup('remove-hlsearch', { clear = true }),
     command = "nohlsearch",
 })
 
+-- remove trailing whitespace on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Remove trailing whitespace (excluing line from cursor if it is a whitespace line)",
     group = vim.api.nvim_create_augroup("remove-trailing", { clear = true }),
