@@ -18,6 +18,7 @@ vim.opt.showbreak = " >> "
 vim.opt.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', leadmultispace= "│   "}
 vim.opt.nrformats = "bin,hex,octal,alpha"
+vim.opt.cursorline = true
 vim.opt.cursorcolumn = false
 vim.opt.colorcolumn = "100"
 vim.opt.textwidth = 100
