@@ -7,7 +7,7 @@ return {
         local ls = require("luasnip")
 
         local function smart_expand()
-            if vim.fn.pumvisible() == 0 then
+            if vim.fn.pumvisible() == 0 and ls.expandable() then
                 vim.schedule(function() ls.expand_or_jump(1) end)
             else
                 return "<C-e>"
