@@ -42,6 +42,8 @@ nmap("<leader>wo", "<cmd>only<cr>zz")
 nmap("<leader>wb", "<cmd>ball<cr><C-w>=")
 nmap("<leader>ö", "<C-]>") -- follow tags
 
+vim.keymap.set("n", "<leader>a", "<cmd>Lexplore<cr>")
+
 -- START center movement
 center_movement("*")
 center_movement("#")
@@ -65,14 +67,13 @@ vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 -- START insert mode
 
 local function i_clever_tab()
-    -- use tab to cycle through completions if possible, then try to complete the snippet  or
-    -- forwards in the snippet, otherwise indent the current line
+    -- use tab to cycle through completions if possible, then try to complete the snippet, otherwise indent the current line
     if vim.fn.pumvisible() ~= 0 then
         return "<C-n>"
     else
         local ls = require("luasnip")
-        if ls.expand_or_locally_jumpable() then
-            vim.schedule(function() ls.expand_or_jump(1) end)
+        if ls.expandable() then
+            vim.schedule(function() ls.expand() end)
         else
             return "<C-T>" -- indent
         end
@@ -81,17 +82,11 @@ end
 vim.keymap.set("i", "<Tab>", i_clever_tab, {expr=true})
 
 local function i_clever_tab_reverse()
-    -- go back in the completion list, or jump backwards in a snippet if possible, otherwise,
-    -- unindent the current line
+    -- go back in the completion list, otherwise, unindent the current line
     if vim.fn.pumvisible() ~= 0 then
         return "<C-p>"
     else
-        local ls = require("luasnip")
-        if ls.locally_jumpable(-1) then
-            vim.schedule(function() ls.jump(-1) end)
-        else
-            return "<C-d>"  -- unindent
-        end
+        return "<C-d>"  -- unindent
     end
 end
 vim.keymap.set("i", "<S-Tab>", i_clever_tab_reverse, {expr=true})
