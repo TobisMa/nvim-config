@@ -45,7 +45,7 @@ vim.opt.swapfile = false
 vim.opt.backup = false
 
 -- look help of ins-completion for ctrl+x submodes; ctrl+e for stopping completion
-vim.opt.completeopt = "fuzzy,menu,menuone,noselect,popup"
+vim.opt.completeopt = "menu,menuone,noselect,popup"
 vim.opt.completeitemalign= "abbr,kind,menu"
 vim.opt.syntax = "on"
 vim.cmd[[filetype plugin on]]
