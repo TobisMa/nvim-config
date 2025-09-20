@@ -1,4 +1,15 @@
-vim.lsp.enable({"lua_ls", "rust-analyzer", "pyright", "jdtls", "clangd", "tinymist"})
+vim.lsp.enable({
+    "lua_ls",
+    "rust-analyzer",
+    "pyright",
+    "jdtls",
+    "clangd",
+    "tinymist",
+    "html",
+    "cssls",
+    "eslint",
+    "emmet_language_server"
+})
 
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function (e)
