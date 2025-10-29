@@ -27,3 +27,10 @@ vim.api.nvim_create_autocmd("BufWritePre", {
         vim.cmd [[normal $]]
     end,
 })
+
+-- lsp trigger for latex
+vim.api.nvim_create_autocmd('LspAttach', {
+    pattern={"*.tex", "*.latex"},
+    group = vim.api.nvim_create_augroup('texlab-environment-swap', {clear=true}),
+    command = "nmap <buffer> <F2> <cmd>LspTexlabChangeEnvironment<cr>",
+})

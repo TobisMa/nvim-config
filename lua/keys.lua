@@ -74,6 +74,8 @@ local function i_clever_tab()
         local ls = require("luasnip")
         if ls.expandable() then
             vim.schedule(function() ls.expand() end)
+        elseif vim.snippet.active({direction = 1}) then
+            vim.snippet.jump(1)
         else
             return "<C-T>" -- indent
         end
@@ -85,6 +87,8 @@ local function i_clever_tab_reverse()
     -- go back in the completion list, otherwise, unindent the current line
     if vim.fn.pumvisible() ~= 0 then
         return "<C-p>"
+    elseif vim.snippet.active({direction = -1}) then
+        vim.snippet.jump(1)
     else
         return "<C-d>"  -- unindent
     end

@@ -10,7 +10,7 @@ vim.opt.wrap = true
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
 vim.opt.shiftwidth = 4
-vim.opt.formatoptions = "tcrlvj1q/n"
+vim.opt.formatoptions = "crlvj1q/n"
 
 vim.opt.linebreak = true
 vim.opt.breakindent = true

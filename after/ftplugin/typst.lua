@@ -1,5 +1,8 @@
 
-vim.cmd[[setlocal spell]]
+vim.cmd[[
+    setlocal spell
+    set formatoptions+=t
+]]
 
 vim.api.nvim_create_autocmd("BufWritePost", {
     desc = "typst-compile",

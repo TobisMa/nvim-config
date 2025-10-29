@@ -1,14 +1,15 @@
 return {
-    cmd = { 'pyright' },
-    filetypes = { 'python' },
     settings = {
         python = {
             analysis = {
                 diagnosticMode = "workspace",
-                diagnosticSeverityOverrides = {
-                }
+                diagnosticSeverityOverrides = {},
+                inlayHints = {
+                    variableTypes = true,
+                    functionReturnTypes = true,
+                },
             },
-            venvPath = "venv",
-        },
+            venvPath = "venv"
+        }
     },
 }

@@ -1,3 +1,5 @@
 return {
+    init_options = {
+    }
 }
 
