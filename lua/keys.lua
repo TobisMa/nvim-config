@@ -12,7 +12,7 @@ local function vmap(key, execute)
 end
 
 local function nvmap(key, execute)
-    vim.keymap.set({'n', 'v'}, key, execute)
+    vim.keymap.set({ 'n', 'v' }, key, execute)
 end
 
 local function imap(key, execute)
@@ -20,8 +20,27 @@ local function imap(key, execute)
 end
 
 local function center_movement(key)
-   map('n', key, key .. "zzzv")
+    map('n', key, key .. "zzzv")
 end
+
+local function restore_indentation()
+    local line = vim.api.nvim_get_current_line()
+    if line:match("^%s*$") then
+        local indent = vim.fn.indent(vim.fn.prevnonblank("."))
+        vim.print(indent)
+        vim.print(vim.fn.indent("."))
+
+        if indent > vim.fn.indent(".") then
+            vim.schedule(function ()
+                vim.fn.feedkeys(string.format("%" .. indent .. "s", ""), "m")
+            end)
+            return true
+        end
+    end
+    return false
+end
+
+local backspace = vim.api.nvim_replace_termcodes('<BS>', true, false, true)
 
 -- START using vim integrated stuff
 -- START normal mode
@@ -34,7 +53,7 @@ nmap("x", "\"_x")
 nmap("X", "\"_X")
 nmap("<leader>x", "xp")
 nmap("<leader>X", "Xp")
-nmap("<leader>be","<cmd>e#<cr>")
+nmap("<leader>be", "<cmd>e#<cr>")
 nmap("<leader>bs", "<cmd>vertical sf #<cr>")
 nmap("<leader>bo", "<cmd>%bd|e#|'\"<cr>")
 nmap("<leader>ww", "<cmd>vsplit<cr>")
@@ -74,26 +93,29 @@ local function i_clever_tab()
         local ls = require("luasnip")
         if ls.expandable() then
             vim.schedule(function() ls.expand() end)
-        elseif vim.snippet.active({direction = 1}) then
+        elseif vim.snippet.active({ direction = 1 }) then
             vim.snippet.jump(1)
         else
-            return "<C-T>" -- indent
-        end
+            -- restore indentation if line is blank
+            if not restore_indentation() then
+                return "<C-t>"
+            end
+        end -- END restore indentation if line is blank
     end
 end
-vim.keymap.set("i", "<Tab>", i_clever_tab, {expr=true})
+vim.keymap.set("i", "<Tab>", i_clever_tab, { expr = true })
 
 local function i_clever_tab_reverse()
     -- go back in the completion list, otherwise, unindent the current line
     if vim.fn.pumvisible() ~= 0 then
         return "<C-p>"
-    elseif vim.snippet.active({direction = -1}) then
+    elseif vim.snippet.active({ direction = -1 }) then
         vim.snippet.jump(1)
     else
-        return "<C-d>"  -- unindent
+        return "<C-d>" -- unindent
     end
 end
-vim.keymap.set("i", "<S-Tab>", i_clever_tab_reverse, {expr=true})
+vim.keymap.set("i", "<S-Tab>", i_clever_tab_reverse, { expr = true })
 
 local function i_clever_return()
     -- use enter to confirm completion if completion menu is opened
@@ -103,7 +125,7 @@ local function i_clever_return()
         return "<cr>"
     end
 end
-vim.keymap.set("i", "<return>", i_clever_return, {expr=true})
+vim.keymap.set("i", "<return>", i_clever_return, { expr = true })
 
 local function ismart_escape()
     -- exits completion if completion list is shown, otherwise esc
@@ -113,7 +135,22 @@ local function ismart_escape()
         return "<esc>"
     end
 end
-vim.keymap.set("i", "<esc>", ismart_escape, {expr=true})
+vim.keymap.set("i", "<esc>", ismart_escape, { expr = true })
+
+local function ismart_backspace()
+    -- if only spaces are left before the cursor clear the whole line and then delete
+    local line = vim.api.nvim_get_current_line()
+    if line:match("^%s+$") then
+        vim.schedule(function()
+            vim.api.nvim_set_current_line("")
+            vim.api.nvim_feedkeys(backspace, "m", false)
+        end)
+    else
+        -- TODO restore indentation after deleting a line when the new line is empty
+        return "<bs>"
+    end
+end
+vim.keymap.set("i", "<bs>", ismart_backspace, { expr = true })
 -- END insert mode
 
 -- START normalvisual mode
@@ -123,8 +160,8 @@ nvmap("<leader>r", "<cmd>make<cr>")
 -- instead of fully jumping to the end
 nvmap("j", "gj")
 nvmap("k", "gk")
-vim.keymap.set({"n", "v"}, "0", "g0")
-vim.keymap.set({"n", "v"}, "$", "g$")
+vim.keymap.set({ "n", "v" }, "0", "g0")
+vim.keymap.set({ "n", "v" }, "$", "g$")
 
 -- END normalvisual mode
 
@@ -154,7 +191,7 @@ end
 vim.keymap.set('n', "<leader>t", function() term_toggle(false) end)
 vim.keymap.set('n', "<leader>T", function() term_toggle(true) end)
 
-vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n>")     -- leave terminal insert with double esc
+vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n>")                -- leave terminal insert with double esc
 vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n><cmd>b#<cr>") -- leave terminal insert with double esc
 -- END integrated terminal
 
@@ -170,8 +207,8 @@ nmap("<leader>ls", vim.lsp.buf.signature_help)
 nmap("<leader>e", vim.diagnostic.open_float)
 nmap("<leader>lr", vim.lsp.buf.references)
 nmap("<leader>lt", vim.lsp.buf.type_definition)
-nmap("<leader>lh", function () vim.lsp.buf.typehierarchy("subtypes") end)
-nmap("<leader>lH", function () vim.lsp.buf.typehierarchy("supertypes") end)
+nmap("<leader>lh", function() vim.lsp.buf.typehierarchy("subtypes") end)
+nmap("<leader>lH", function() vim.lsp.buf.typehierarchy("supertypes") end)
 nmap("gI", vim.lsp.buf.implementation)
 nmap("gd", vim.lsp.buf.definition)
 nmap("gD", vim.lsp.buf.declaration)

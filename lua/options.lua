@@ -66,6 +66,8 @@ vim.opt.wildignore = {
     "*.class",
     "*.o",
     "*.bak",
+    "*.pdf",
+    "*.db"
 }
 
 vim.schedule(function ()

@@ -19,12 +19,13 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("remove-trailing", { clear = true }),
     pattern = { "*" },
     callback = function()
+        local pos = vim.fn.getpos(".")
         local line = vim.api.nvim_get_current_line()
-        vim.cmd [[silent! %s/\(\S\)\s\+$/\1/]]
+        vim.cmd [[silent! %s/\(\S\?\)\s\+$/\1/]]
         if line:match("^%s*$") then
             vim.api.nvim_set_current_line(line)
         end
-        vim.cmd [[normal $]]
+        vim.fn.setpos(".", pos)
     end,
 })
 
