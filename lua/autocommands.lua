@@ -39,10 +39,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
 -- lsp c commands
 vim.api.nvim_create_autocmd('LspAttach', {
-    pattern={"*.c", "*.cpp"},
+    pattern={"*.c", "*.cpp", "*.hpp", "*.h"},
     group = vim.api.nvim_create_augroup('lsp.c/cpp', {clear=true}),
     callback = function ()
         vim.keymap.set({"n", "i"}, "<C-S-K>", "<cmd>LspClangdShowSymbolInfo<cr>")
         vim.keymap.set({"n", "i"}, "<C-ö>", "<cmd>LspClangdSwitchSourceHeader<cr>")
+        vim.keymap.set({"n", "i"}, "<leader>I", "<cmd>LspClangdSwitchSourceHeader<cr>")
     end,
 })
