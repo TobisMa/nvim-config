@@ -44,6 +44,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function ()
         vim.keymap.set({"n", "i"}, "<C-S-K>", "<cmd>LspClangdShowSymbolInfo<cr>")
         vim.keymap.set({"n", "i"}, "<C-ö>", "<cmd>LspClangdSwitchSourceHeader<cr>")
-        vim.keymap.set({"n", "i"}, "<leader>I", "<cmd>LspClangdSwitchSourceHeader<cr>")
+        vim.keymap.set({"n"}, "<leader>I", "<cmd>LspClangdSwitchSourceHeader<cr>")
     end,
 })
