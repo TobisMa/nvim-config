@@ -2,6 +2,7 @@
 vim.cmd[[
     setlocal spell
     set formatoptions+=t
+    set textwidth=100
 ]]
 
 vim.api.nvim_create_autocmd("BufWritePost", {

@@ -191,8 +191,8 @@ end
 vim.keymap.set('n', "<leader>t", function() term_toggle(false) end)
 vim.keymap.set('n', "<leader>T", function() term_toggle(true) end)
 
-vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n>")                -- leave terminal insert with double esc
-vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n><cmd>b#<cr>") -- leave terminal insert with double esc
+vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n>")        -- leave terminal insert with double esc
+vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n><cmd>b#<cr>") -- leave terminal insert with double esc and return to last edited buffer
 -- END integrated terminal
 
 -- START lsp keycodes
