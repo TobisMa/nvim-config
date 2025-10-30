@@ -29,9 +29,20 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
--- lsp trigger for latex
+-- lsp latex keybind
 vim.api.nvim_create_autocmd('LspAttach', {
     pattern={"*.tex", "*.latex"},
-    group = vim.api.nvim_create_augroup('texlab-environment-swap', {clear=true}),
+    group = vim.api.nvim_create_augroup('lsp.texlab-environment-swap', {clear=true}),
     command = "nmap <buffer> <F2> <cmd>LspTexlabChangeEnvironment<cr>",
+})
+
+
+-- lsp c commands
+vim.api.nvim_create_autocmd('LspAttach', {
+    pattern={"*.c", "*.cpp"},
+    group = vim.api.nvim_create_augroup('lsp.c/cpp', {clear=true}),
+    callback = function ()
+        vim.keymap.set({"n", "i"}, "<C-S-K>", "<cmd>LspClangdShowSymbolInfo<cr>")
+        vim.keymap.set({"n", "i"}, "<C-ö>", "<cmd>LspClangdSwitchSourceHeader<cr>")
+    end,
 })
