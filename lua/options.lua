@@ -16,7 +16,7 @@ vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.showbreak = " >> "
 vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', leadmultispace= "│   "}
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', leadmultispace= "│   "} -- move to autocommands.lua
 vim.opt.nrformats = "bin,hex,octal,alpha"
 vim.opt.cursorline = true
 vim.opt.cursorcolumn = false
