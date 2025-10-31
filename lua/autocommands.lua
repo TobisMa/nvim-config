@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd({ "OptionSet", "UIEnter" }, {
         end
         local lms = "" for _ = 2, vim.bo.shiftwidth do lms = lms .. " " end
         vim.opt.listchars = {
-            leadmultispace = "|" .. lms,
+            leadmultispace = "│" .. lms,
             trail = "·",
             nbsp = "␣",
             tab = "» "
