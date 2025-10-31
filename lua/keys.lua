@@ -27,9 +27,6 @@ local function restore_indentation()
     local line = vim.api.nvim_get_current_line()
     if line:match("^%s*$") then
         local indent = vim.fn.indent(vim.fn.prevnonblank("."))
-        vim.print(indent)
-        vim.print(vim.fn.indent("."))
-
         if indent > vim.fn.indent(".") then
             vim.schedule(function ()
                 vim.fn.feedkeys(string.format("%" .. indent .. "s", ""), "m")
@@ -140,15 +137,16 @@ end
 vim.keymap.set("i", "<esc>", ismart_escape, { expr = true })
 
 local function ismart_backspace()
-    -- if only spaces are left before the cursor clear the whole line and then delete
+    -- if only spaces are left before the cursor clear the whole line and then delete; restore indentation in the new line
     local line = vim.api.nvim_get_current_line()
     if line:match("^%s+$") then
         vim.schedule(function()
-            vim.api.nvim_set_current_line("")
-            vim.api.nvim_feedkeys(backspace, "m", false)
+            vim.api.nvim_del_current_line()
+            local cursor = vim.api.nvim_win_get_cursor(0)
+            restore_indentation()
+            vim.api.nvim_win_set_cursor(0, {cursor[1], vim.v.maxcol})
         end)
     else
-        -- TODO restore indentation after deleting a line when the new line is empty
         return "<bs>"
     end
 end
