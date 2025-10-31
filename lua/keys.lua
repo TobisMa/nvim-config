@@ -143,8 +143,8 @@ local function ismart_backspace()
         vim.schedule(function()
             vim.api.nvim_del_current_line()
             local cursor = vim.api.nvim_win_get_cursor(0)
+            vim.api.nvim_win_set_cursor(0, {math.max(1, cursor[1] - 1), vim.v.maxcol}) -- fix cursor position
             restore_indentation()
-            vim.api.nvim_win_set_cursor(0, {cursor[1], vim.v.maxcol})
         end)
     else
         return "<bs>"
