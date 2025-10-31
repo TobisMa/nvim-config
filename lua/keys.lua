@@ -89,6 +89,8 @@ local function i_clever_tab()
     -- use tab to cycle through completions if possible, then try to complete the snippet, otherwise indent the current line
     if vim.fn.pumvisible() ~= 0 then
         return "<C-n>"
+    elseif vim.snippet.active({direction = 1}) then
+        return "<cmd>lua vim.snippet.jump(1)<cr>"
     else
         local ls = require("luasnip")
         if ls.expandable() then
@@ -110,7 +112,7 @@ local function i_clever_tab_reverse()
     if vim.fn.pumvisible() ~= 0 then
         return "<C-p>"
     elseif vim.snippet.active({ direction = -1 }) then
-        vim.snippet.jump(1)
+        vim.snippet.jump(-1)
     else
         return "<C-d>" -- unindent
     end
