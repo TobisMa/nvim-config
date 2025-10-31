@@ -61,5 +61,25 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set({ "n", "i" }, "<C-S-K>", "<cmd>LspClangdShowSymbolInfo<cr>")
         vim.keymap.set({ "n", "i" }, "<C-ö>", "<cmd>LspClangdSwitchSourceHeader<cr>")
         vim.keymap.set({ "n" }, "<leader>I", "<cmd>LspClangdSwitchSourceHeader<cr>")
+
+        -- remove double > or " when inserting header
+        vim.api.nvim_create_autocmd('CompleteDone', {
+            group = vim.api.nvim_create_augroup('lsp.c/cpp-header1', { clear = true }),
+            callback = function ()
+                local line = vim.api.nvim_get_current_line();
+                if line:find("^#include <([a-zA-Z0-9_/.+-]+)>>$") then
+                    local cur = vim.fn.getcurpos(0)
+                    vim.cmd[[s/^#include <\(\S\+\)>>$/#include <\1>]]
+                    vim.fn.setpos(".", cur)
+                end
+                if line:find("^#include \"([a-zA-Z0-9_/.+-]+)\"\"$") then
+                    local cur = vim.fn.getcurpos(0)
+                    vim.cmd[[s/^#include \"\(\S\+\)\"\"$/#include \"\1\"]]
+                    vim.fn.setpos(".", cur)
+                end
+
+            end,
+            buffer=0
+        })
     end,
 })
