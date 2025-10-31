@@ -202,6 +202,7 @@ nvmap("<C-.>", vim.lsp.buf.code_action)
 imap("<C-space>", "<C-x><C-o>")
 
 nmap("K", vim.lsp.buf.hover)
+nmap("<C-k>", "K")  -- move calling keywordprg to c-k (default would be K)
 nmap("<F2>", vim.lsp.buf.rename)
 nmap("<leader>ls", vim.lsp.buf.signature_help)
 nmap("<leader>e", vim.diagnostic.open_float)
