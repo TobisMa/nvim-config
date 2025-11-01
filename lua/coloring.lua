@@ -4,7 +4,7 @@ colorscheme vague
 hi Search ctermfg=0 ctermbg=11 guifg=#cdcdcd guibg=#405065
 
 hi NonText guifg=red
-hi Whitespace guifg=#a5a5a5
+hi Whitespace guifg=#555555
 "hi PreInsert cterm=bold
 hi ColorColumn ctermbg=black
 
