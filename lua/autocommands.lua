@@ -60,7 +60,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     callback = function()
         vim.keymap.set({ "n", "i" }, "<C-S-K>", "<cmd>LspClangdShowSymbolInfo<cr>")
         vim.keymap.set({ "n", "i" }, "<C-ö>", "<cmd>LspClangdSwitchSourceHeader<cr>")
-        vim.keymap.set({ "n" }, "<leader>I", "<cmd>LspClangdSwitchSourceHeader<cr>")
+        vim.keymap.set({ "n" }, "<leader>i", "<cmd>LspClangdSwitchSourceHeader<cr>")
 
         -- remove double > or " when inserting header
         vim.api.nvim_create_autocmd('CompleteDone', {
@@ -77,7 +77,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
                     vim.cmd[[s/^#include \"\(\S\+\)\"\"$/#include \"\1\"]]
                     vim.fn.setpos(".", cur)
                 end
-
             end,
             buffer=0
         })
