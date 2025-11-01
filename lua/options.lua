@@ -51,6 +51,9 @@ vim.opt.syntax = "on"
 vim.cmd[[filetype plugin on]]
 vim.opt.pumheight = 20
 
+-- command completion
+vim.cmd[[set wildmode=noselect:lastused,full]]
+
 
 vim.opt.mps:append { '<:>', '=:;', '⟨:⟩', '⌈:⌉', '⌊:⌋', '»:«', '›:‹', '„:“', '„:”', '‚:‘', '‚:’'}
 
