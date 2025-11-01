@@ -46,21 +46,22 @@ nmap("<esc>", "<cmd>nohlsearch<CR>")                -- remove search highlightin
 nmap("<leader>v", "ggVG")                           -- select whole file in visual line
 nmap("<leader>k", "<cmd>m .-2<cr>")
 nmap("<leader>j", "<cmd>m .+1<cr>")
-nmap("x", "\"_x")
-nmap("X", "\"_X")
-nmap("<leader>x", "xp")
-nmap("<leader>X", "Xp")
-nmap("<leader>be", "<cmd>e#<cr>")
-nmap("<leader>bs", "<cmd>vertical sf #<cr>")
-nmap("<leader>bo", "<cmd>%bd|e#|'\"<cr>")
-nmap("<leader>ww", "<cmd>vsplit<cr>")
-nmap("<leader>wo", "<cmd>only<cr>zz")
-nmap("<leader>wb", "<cmd>ball<cr><C-w>=")
+nmap("x", "\"_x")  -- don't save the character on the clipboard
+nmap("X", "\"_X")  -- don't save the character on the clipboard
+nmap("<leader>x", "xp")  -- swap the right character with the character under the cursor
+nmap("<leader>X", "Xp")  -- swap the left character with the character under the cursor
+nmap("<leader>be", "<cmd>e#<cr>")  -- go to previous buffer (if it had a name)
+nmap("<leader>bs", "<cmd>vertical sf #<cr>")  -- split current buffer with previous vertically
+nmap("<leader>bo", "<cmd>%bd|e#|'\"<cr>")  -- close every other buffer than the current
+nmap("<leader>ww", "<cmd>vsplit<cr>")  -- split current buffer into two windows. go to the new window
+nmap("<leader>wo", "<cmd>only<cr>zz")  -- show only the buffer of the current window (closes all other windows)
+nmap("<leader>wb", "<cmd>ball<cr><C-w>=")  -- show every opened buffer
 nmap("<leader>ö", "<C-]>") -- follow tags
 
 vim.keymap.set("n", "<leader>a", "<cmd>Lexplore<cr>")
 
 -- START center movement
+-- below commands force the cursor to stay on the middle of the screen
 center_movement("*")
 center_movement("#")
 center_movement("n")
@@ -74,8 +75,8 @@ center_movement("<C-f>")
 -- END normal mode
 
 -- START visual mode
-vmap("<", "<gv")
-vmap(">", ">gv")
+vmap("<", "<gv")  -- indenting out and keep selection
+vmap(">", ">gv")  -- indent and keep selection
 vmap("<leader>k", ":'<,'>m '<-2<cr>gv") -- moving lines up (: instead of <cmd> because <cmd> does not leave visual mode)
 vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 -- END visual mode
@@ -97,7 +98,7 @@ local function i_clever_tab()
         else
             -- restore indentation if line is blank
             if not restore_indentation() then
-                return "<C-t>"
+                return "<C-t>" -- indent line
             end
         end -- END restore indentation if line is blank
     end
@@ -154,14 +155,14 @@ vim.keymap.set("i", "<bs>", ismart_backspace, { expr = true })
 -- END insert mode
 
 -- START normalvisual mode
-nvmap("<leader>r", "<cmd>make<cr>")
+nvmap("<leader>r", "<cmd>make<cr>")  -- call the set makeprg (set in after/ftplugin/<lang>.lua). QuickFix list can be used then. See below in the LSP section
 
 -- make behaviour on wrapped lines as expected. that means those commands work for each wrapped line
 -- instead of fully jumping to the end
-nvmap("j", "gj")
-nvmap("k", "gk")
-vim.keymap.set({ "n", "v" }, "0", "g0")
-vim.keymap.set({ "n", "v" }, "$", "g$")
+nvmap("j", "gj")  -- make j behave the same as in wrapped lines
+nvmap("k", "gk")  -- make k behave the same as in wrapped lines
+vim.keymap.set({ "n", "v" }, "0", "g0") -- make 0 behave the same in wrapped lines
+vim.keymap.set({ "n", "v" }, "$", "g$") -- make $ behave the same as in wrapped lines
 
 -- END normalvisual mode
 
@@ -188,39 +189,40 @@ local function term_toggle(close)
     end
 end
 
-vim.keymap.set('n', "<leader>t", function() term_toggle(false) end)
-vim.keymap.set('n', "<leader>T", function() term_toggle(true) end)
+vim.keymap.set('n', "<leader>t", function() term_toggle(false) end)  -- go to terminal buffer (creates a terminal if no terminal exists yet)
+                                                                     -- if terminal buffer go back to previous buffer
+vim.keymap.set('n', "<leader>T", function() term_toggle(true) end)   -- close terminal
 
-vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n>")        -- leave terminal insert with double esc
-vim.keymap.set('t', "<Esc><Esc>", "<C-\\><C-n><cmd>b#<cr>") -- leave terminal insert with double esc and return to last edited buffer
+vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n>")        -- leave terminal insert mode with double esc
+vim.keymap.set({'t', 'n'}, "<Esc><Esc>", "<C-\\><C-n><cmd>b#<cr>") -- leave terminal with double esc and return to last edited buffer
 -- END integrated terminal
 
 -- START lsp keycodes
-nvmap("<leader>lf", vim.lsp.buf.format)
-nvmap("<C-.>", vim.lsp.buf.code_action)
+nvmap("<leader>lf", vim.lsp.buf.format)  -- format code if LSP has formatter
+nvmap("<C-.>", vim.lsp.buf.code_action)  -- code action (like IntelliJ Alt+enter)
 
-imap("<C-space>", "<C-x><C-o>")
+imap("<C-space>", "<C-x><C-o>")  -- trigger autocompletion
 
-nmap("K", vim.lsp.buf.hover)
+nmap("K", vim.lsp.buf.hover)  -- give hover info of functions/methods/variables/...
 nmap("<C-k>", "K")  -- move calling keywordprg to c-k (default would be K)
-nmap("<F2>", vim.lsp.buf.rename)
-nmap("<leader>ls", vim.lsp.buf.signature_help)
-nmap("<leader>e", vim.diagnostic.open_float)
-nmap("<leader>lr", vim.lsp.buf.references)
-nmap("<leader>lt", vim.lsp.buf.type_definition)
-nmap("<leader>lh", function() vim.lsp.buf.typehierarchy("subtypes") end)
-nmap("<leader>lH", function() vim.lsp.buf.typehierarchy("supertypes") end)
-nmap("gI", vim.lsp.buf.implementation)
-nmap("gd", vim.lsp.buf.definition)
-nmap("gD", vim.lsp.buf.declaration)
+nmap("<F2>", vim.lsp.buf.rename)  -- rename variable/function/...
+nmap("<leader>ls", vim.lsp.buf.signature_help)  -- signature help in a floating window
+nmap("<leader>e", vim.diagnostic.open_float)  -- shows error messages in a floating window if they exist at current position
+nmap("<leader>lr", vim.lsp.buf.references)  -- open references associated with variable/function in QuickFix list
+nmap("<leader>lt", vim.lsp.buf.type_definition) -- go to type definition/declaration
+nmap("<leader>lh", function() vim.lsp.buf.typehierarchy("subtypes") end)  -- list child classes (generally subtypes) in the quickfix list
+nmap("<leader>lH", function() vim.lsp.buf.typehierarchy("supertypes") end)  -- -- list child classes (generally subtypes) in the quickfix list
+nmap("gI", vim.lsp.buf.implementation)  -- shows implementations for the symbol under cursor in the quickfix list (go to symbol if only one implementation exists)
+nmap("gd", vim.lsp.buf.definition)  -- go to defintion of the symbol under the cursor (not declaration)
+nmap("gD", vim.lsp.buf.declaration)  -- go to declaration of the symbol under the cursor (not definition)
 
 -- quickfix
-nmap("<leader>ql", "<cmd>cwindow<cr>")
-nmap("<leader>qP", "<cmd>cfirst<cr>")
-nmap("<leader>qp", "<cmd>cprevious<cr>")
-nmap("<leader>qq", "<cmd>cc<cr>")
-nmap("<leader>qn", "<cmd>cnext<cr>")
-nmap("<leader>qN", "<cmd>clast<cr>")
+nmap("<leader>ql", "<cmd>cwindow<cr>")  -- open quickfix list if items exist (nothing happens if there are no items)
+nmap("<leader>qP", "<cmd>cfirst<cr>")   -- go to first entry in the quickfix list
+nmap("<leader>qp", "<cmd>cprevious<cr>")  -- go to previous quickfix list entry
+nmap("<leader>qq", "<cmd>cc<cr>")  -- go to current quickfix list entry (last selected)
+nmap("<leader>qn", "<cmd>cnext<cr>")  -- go to next quickfix list entry
+nmap("<leader>qN", "<cmd>clast<cr>")  -- go to last entry in the quickfix list
 -- END lsp keycodes
 
 -- START luasnip bindings
