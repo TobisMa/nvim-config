@@ -31,6 +31,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
+vim.lsp.inlay_hint.enable(true, nil)  -- enable inlay hints for all buffers
+
 vim.diagnostic.config({
   virtual_text = true
 })
