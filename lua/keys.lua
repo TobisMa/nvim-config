@@ -69,8 +69,9 @@ nmap("<leader>ww", "<cmd>vsplit<cr>")  -- split current buffer into two windows.
 nmap("<leader>wo", "<cmd>only<cr>zz")  -- show only the buffer of the current window (closes all other windows)
 nmap("<leader>wb", "<cmd>ball<cr><C-w>=")  -- show every opened buffer
 nmap("<leader>ö", "<C-]>") -- follow tags
-
-vim.keymap.set("n", "<leader>a", "<cmd>Lexplore<cr>")  -- toggle a fileexplorer buffer left
+nmap("<leader>a", "<cmd>Lexplore<cr>")  -- toggle a fileexplorer buffer left
+nmap("<Tab>", "<cmd>bnext<cr>")  -- go to next buffer
+nmap("<S-Tab>", "<cmd>bprev<cr>")  -- go to previous buffer
 
 -- START center movement
 -- below commands force the cursor to stay on the middle of the screen
