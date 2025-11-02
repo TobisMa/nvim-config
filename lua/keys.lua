@@ -125,7 +125,7 @@ local function i_clever_return()
         return "<cr>"
     end
 end
-vim.keymap.set("i", "<return>", i_clever_return, { expr = true })
+vim.keymap.set("i", "<cr>", i_clever_return, { expr = true })
 
 local function ismart_escape()
     -- exits completion if completion list is shown, otherwise esc
