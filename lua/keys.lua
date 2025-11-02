@@ -11,6 +11,10 @@ local function vmap(key, execute)
     vim.keymap.set('x', key, execute) -- as x is strictly visual mode and v ist select AND visual mode
 end
 
+local function smap(key, execute, opts)
+    vim.keymap.set('s', key, execute, opts)
+end
+
 local function nvmap(key, execute)
     vim.keymap.set({ 'n', 'v' }, key, execute)
 end
@@ -81,6 +85,18 @@ vmap("<leader>k", ":'<,'>m '<-2<cr>gv") -- moving lines up (: instead of <cmd> b
 vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 -- END visual mode
 
+-- START select mode
+local function snippet_move(dir, key)
+    if vim.snippet.active{direction = dir} then
+        vim.snippet.jump(dir)
+    else
+        return key
+    end
+end
+smap("<Tab>", function () snippet_move(1, "<Tab>") end, {})
+smap("<S-Tab>", function () snippet_move(-1, "<S-Tab>") end, {})
+-- END select mode
+
 -- START insert mode
 
 local function i_clever_tab()
@@ -125,7 +141,7 @@ local function i_clever_return()
         return "<cr>"
     end
 end
-vim.keymap.set("i", "<cr>", i_clever_return, { expr = true })
+vim.keymap.set("i", "<cr>", i_clever_return, { expr = true, remap=true })
 
 local function ismart_escape()
     -- exits completion if completion list is shown, otherwise esc
@@ -194,7 +210,7 @@ vim.keymap.set('n', "<leader>t", function() term_toggle(false) end)  -- go to te
 vim.keymap.set('n', "<leader>T", function() term_toggle(true) end)   -- close terminal
 
 vim.keymap.set('t', "<S-Esc><S-Esc>", "<C-\\><C-n>")        -- leave terminal insert mode with double esc
-vim.keymap.set({'t', 'n'}, "<Esc><Esc>", "<C-\\><C-n><cmd>b#<cr>") -- leave terminal with double esc and return to last edited buffer
+vim.keymap.set({'t'}, "<Esc><Esc>", "<C-\\><C-n><cmd>b#<cr>") -- leave terminal with double esc and return to last edited buffer
 -- END integrated terminal
 
 -- START lsp keycodes
