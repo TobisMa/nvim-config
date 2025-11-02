@@ -48,8 +48,8 @@ local backspace = vim.api.nvim_replace_termcodes('<BS>', true, false, true)
 nmap("<leader>o", "<cmd>update<cr><cmd>source<cr>") -- source config
 nmap("<esc>", "<cmd>nohlsearch<CR>")                -- remove search highlighting
 nmap("<leader>v", "ggVG")                           -- select whole file in visual line
-nmap("<leader>k", "<cmd>m .-2<cr>")
-nmap("<leader>j", "<cmd>m .+1<cr>")
+nmap("<leader>k", "<cmd>m .-2<cr>")                 -- move current line up (by one line)
+nmap("<leader>j", "<cmd>m .+1<cr>")                 -- move current line down (by one line)
 nmap("x", "\"_x")  -- don't save the character on the clipboard
 nmap("X", "\"_X")  -- don't save the character on the clipboard
 nmap("<leader>x", "xp")  -- swap the right character with the character under the cursor
@@ -62,7 +62,7 @@ nmap("<leader>wo", "<cmd>only<cr>zz")  -- show only the buffer of the current wi
 nmap("<leader>wb", "<cmd>ball<cr><C-w>=")  -- show every opened buffer
 nmap("<leader>ö", "<C-]>") -- follow tags
 
-vim.keymap.set("n", "<leader>a", "<cmd>Lexplore<cr>")
+vim.keymap.set("n", "<leader>a", "<cmd>Lexplore<cr>")  -- toggle a fileexplorer buffer left
 
 -- START center movement
 -- below commands force the cursor to stay on the middle of the screen
