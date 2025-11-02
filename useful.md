@@ -34,6 +34,10 @@ ctrl-w  prefix to make buffer window actions
     | _     set width/height of the window to count
 
 
+# useful kumps
+- use ctrl-o to jump to jump back to where the cursor where before (using gd, gD, gI, etc... (huge jumps))
+- use ctrl-i to invert ctrl-o
+
 # marks
 - use `m<reg>` to set a mark
 - use `'<reg>` to go to line on first non blank character
