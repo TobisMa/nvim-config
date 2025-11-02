@@ -27,6 +27,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
             -- local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
             client.server_capabilities.completionProvider.triggerCharacters = chars
             vim.lsp.completion.enable(true, client.id, e.buf, {autotrigger = true})
+
+            -- vim.api.nvim_create_autocmd('CompleteDone', {
+            --     group = vim.api.nvim_create_augroup('tobisma.lsp.completion', { clear = true }),
+            --     callback = vim.lsp.buf.signature_help,
+            --     buffer=0
+            -- })
         end
     end
 })

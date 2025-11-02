@@ -11,8 +11,8 @@ local function vmap(key, execute)
     vim.keymap.set('x', key, execute) -- as x is strictly visual mode and v ist select AND visual mode
 end
 
-local function smap(key, execute, opts)
-    vim.keymap.set('s', key, execute, opts)
+local function smap(key, execute)
+    vim.keymap.set('s', key, execute)
 end
 
 local function nvmap(key, execute)
@@ -40,6 +40,14 @@ local function restore_indentation()
     end
     return false
 end
+
+-- local function signature_help()
+--     if true then  -- only call if signature help is available in the future
+--         vim.schedule(
+--             vim.lsp.buf.signature_help
+--         )
+--     end
+-- end
 
 local backspace = vim.api.nvim_replace_termcodes('<BS>', true, false, true)
 
@@ -89,12 +97,13 @@ vmap("<leader>j", ":'<,'>m '>+1<cr>gv") -- moving lines down (see above)
 local function snippet_move(dir, key)
     if vim.snippet.active{direction = dir} then
         vim.snippet.jump(dir)
+        -- signature_help()
     else
         return key
     end
 end
-smap("<Tab>", function () snippet_move(1, "<Tab>") end, {})
-smap("<S-Tab>", function () snippet_move(-1, "<S-Tab>") end, {})
+smap("<Tab>", function () snippet_move(1, "<Tab>") end)
+smap("<S-Tab>", function () snippet_move(-1, "<S-Tab>") end)
 -- END select mode
 
 -- START insert mode
@@ -111,6 +120,7 @@ local function i_clever_tab()
             vim.schedule(function() ls.expand() end)
         elseif vim.snippet.active({ direction = 1 }) then
             vim.snippet.jump(1)
+            -- signature_help()
         else
             -- restore indentation if line is blank
             if not restore_indentation() then
@@ -127,6 +137,7 @@ local function i_clever_tab_reverse()
         return "<C-p>"
     elseif vim.snippet.active({ direction = -1 }) then
         vim.snippet.jump(-1)
+        -- signature_help()
     else
         return "<C-d>" -- unindent
     end
@@ -136,12 +147,13 @@ vim.keymap.set("i", "<S-Tab>", i_clever_tab_reverse, { expr = true })
 local function i_clever_return()
     -- use enter to confirm completion if completion menu is opened
     if vim.fn.pumvisible() ~= 0 and vim.fn.complete_info()["selected"] ~= -1 then
+        -- use complete done to call signature help
         return "<C-y>"
     else
         return "<cr>"
     end
 end
-vim.keymap.set("i", "<cr>", i_clever_return, { expr = true, remap=true })
+vim.keymap.set("i", "<cr>", i_clever_return, { expr = true })
 
 local function ismart_escape()
     -- exits completion if completion list is shown, otherwise esc
