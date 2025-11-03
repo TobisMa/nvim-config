@@ -10,7 +10,8 @@ vim.lsp.enable({
     "eslint",
     "emmet_language_server",
     "jinja_lsp",
-    "texlab"
+    "texlab",
+    "ts_ls"
 })
 
 
