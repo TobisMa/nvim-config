@@ -12,4 +12,6 @@ return {
             venvPath = "venv"
         }
     },
+    root_markers = { "pyrightconfig.json", "pyproject.toml", "main.py", "app.py", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", ".git" }
+
 }
