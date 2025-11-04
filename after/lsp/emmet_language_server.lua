@@ -1,5 +1,3 @@
 return {
-    init_options = {
-    }
 }
 
