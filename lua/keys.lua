@@ -232,7 +232,7 @@ nvmap("<C-.>", vim.lsp.buf.code_action)  -- code action (like IntelliJ Alt+enter
 
 imap("<C-space>", "<C-x><C-o>")  -- trigger autocompletion
 
-nmap("K", vim.lsp.buf.hover)  -- give hover info of functions/methods/variables/...
+-- nmap("K", vim.lsp.buf.hover)  -- give hover info of functions/methods/variables/... (only defined when an LSP attached)
 nmap("<C-k>", "K")  -- move calling keywordprg to c-k (default would be K)
 nmap("<F2>", vim.lsp.buf.rename)  -- rename variable/function/...
 nmap("<leader>ls", vim.lsp.buf.signature_help)  -- signature help in a floating window

@@ -18,10 +18,11 @@ vim.lsp.enable({
 vim.api.nvim_create_autocmd("LspAttach", {
     group = vim.api.nvim_create_augroup("tobisma.lsp", {clear = true}),
     callback = function (e)
+        vim.keymap.set("n", "K", vim.lsp.buf.hover, {buffer=0})
         local client = assert(vim.lsp.get_client_by_id(e.data.client_id))
         if client:supports_method('textDocument/completion') then
             -- Optional: trigger autocompletion on EVERY keypress. May be slow!
-            local chars = {"\\", "$", "#", "<"};
+            local chars = {"\\", "$", "#", "<", "."};
             for i = 65, 90 do table.insert(chars, string.char(i)) end
             for i = 97, 122 do table.insert(chars, string.char(i)) end
             -- above three lines may be changed to (untested):
