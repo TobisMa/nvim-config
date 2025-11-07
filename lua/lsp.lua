@@ -2,6 +2,7 @@ vim.lsp.enable({
     "lua_ls",
     "rust-analyzer",
     "pyright",
+    "ty",
     "jdtls",
     "clangd",
     "tinymist",
