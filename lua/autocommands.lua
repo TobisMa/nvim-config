@@ -13,6 +13,7 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     command = "nohlsearch",
 })
 
+-- configure space indentation and update on OptionSet
 vim.api.nvim_create_autocmd({ "OptionSet", "UIEnter" }, {
     group = vim.api.nvim_create_augroup('indent-guides', { clear = true }),
     callback = function()
@@ -28,6 +29,59 @@ vim.api.nvim_create_autocmd({ "OptionSet", "UIEnter" }, {
         }
     end,
 })
+
+-- store nvim session
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = vim.api.nvim_create_augroup("store-session", { clear= true}),
+    callback = function ()
+        if not vim.v.dying then
+            vim.cmd[[mksession .session.vim]]
+        elseif #vim.api.nvim_list_bufs() >= 15 then
+            local res = vim.fn.input("Save session (y/N):")
+            if res == "y" then
+                vim.cmd[[mksession! .session.vim]]
+            end
+        end
+    end
+})
+
+-- load nvim session
+vim.api.nvim_create_autocmd("UIEnter", {
+    group = vim.api.nvim_create_augroup("load-session", { clear= true}),
+    callback = function ()
+        if vim.fn.filereadable(vim.fn.expand(".session.vim")) == 1 then
+            local res = vim.fn.input("Load session (y/N):")
+            if res == "y" then
+                vim.schedule(function ()
+                    vim.cmd[[source .session.vim]]
+                    vim.cmd[[silent! !rm .session.vim]]
+                end)
+            end
+        end
+    end
+})
+
+-- keep cursor position in file
+vim.api.nvim_create_autocmd("BufReadPost", {
+    callback = function (args)
+        local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
+        local lines = vim.api.nvim_buf_line_count(args.buf)
+        if mark[1] > 0 and mark[1] <= lines then
+            vim.api.nvim_win_set_cursor(0, mark)
+            vim.schedule(function ()
+                vim.cmd[[normal! zz]]
+            end)
+        end
+    end
+})
+
+
+-- vim.api.nvim_create_autocmd("InsertEnter", {
+--     group = vim.api.nvim_create_augroup('indent-guides', { clear = true }),
+--     callback = function ()
+--         vim.api.nvim_buf_set_extmark
+--     end
+-- })
 
 -- remove trailing whitespace on save
 vim.api.nvim_create_autocmd("BufWritePre", {
