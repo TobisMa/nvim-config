@@ -1,6 +1,6 @@
 return {
     "TobisMa/indentguide.nvim",
     opts = {
-        exclude_pattern = {"lazy", "help", "tutor"}
+        exclude_pattern = {"lazy", "help", "tutor", "man"}
     },
 }
