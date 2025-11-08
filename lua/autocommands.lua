@@ -13,22 +13,22 @@ vim.api.nvim_create_autocmd("InsertEnter", {
     command = "nohlsearch",
 })
 
--- configure space indentation and update on OptionSet
-vim.api.nvim_create_autocmd({ "OptionSet", "UIEnter" }, {
-    group = vim.api.nvim_create_augroup('indent-guides', { clear = true }),
-    callback = function()
-        if vim.bo.shiftwidth <= 0 then
-            return
-        end
-        local lms = "" for _ = 2, vim.bo.shiftwidth do lms = lms .. " " end
-        vim.opt.listchars = {
-            leadmultispace = "│" .. lms,
-            trail = "·",
-            nbsp = "␣",
-            tab = "» "
-        }
-    end,
-})
+-- configure space indentation and update on OptionSet (replaced by plugin)
+-- vim.api.nvim_create_autocmd({ "OptionSet", "UIEnter" }, {
+--     group = vim.api.nvim_create_augroup('indent-guides', { clear = true }),
+--     callback = function()
+--         if vim.bo.shiftwidth <= 0 then
+--             return
+--         end
+--         local lms = "" for _ = 2, vim.bo.shiftwidth do lms = lms .. " " end
+--         -- vim.opt.listchars = {
+--         --     leadmultispace = "│" .. lms,
+--         --     trail = "·",
+--         --     nbsp = "␣",
+--         --     tab = "» "
+--         -- }
+--     end,
+-- })
 
 -- store nvim session
 vim.api.nvim_create_autocmd("VimLeavePre", {
