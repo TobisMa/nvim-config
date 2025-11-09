@@ -1,8 +1,9 @@
 return {
     "TobisMa/checkstyle-integration.nvim",
+    ft = "java",
     opts = {
-        checkstyle_file = "<your path to the checkstyle file>",
-        checkstyle_on_write = false
+        force_severity = nil,
+        checkstyle_file = "./checkstyle.xml",
+        checkstyle_on_write = true,
     },
-    disabled = true
 }
