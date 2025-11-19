@@ -122,7 +122,14 @@ local function i_clever_tab()
             vim.schedule(function() ls.expand() end)
         else
             -- restore indentation if line is blank
-            if not restore_indentation() then
+            local line = vim.api.nvim_get_current_line()
+            local charPos = vim.fn.getcharpos(".")[3] - 1
+            if line:len() <= charPos then
+                vim.print(charPos)
+                vim.print(line:len())
+                vim.print()
+                return "<Tab>"
+            elseif not restore_indentation() then
                 return "<C-t>" -- indent line
             end
         end -- END restore indentation if line is blank
