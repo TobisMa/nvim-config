@@ -76,13 +76,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 
--- vim.api.nvim_create_autocmd("InsertEnter", {
---     group = vim.api.nvim_create_augroup('indent-guides', { clear = true }),
---     callback = function ()
---         vim.api.nvim_buf_set_extmark
---     end
--- })
-
 -- remove trailing whitespace on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     desc = "Remove trailing whitespace (excluing line from cursor if it is a whitespace line)",
