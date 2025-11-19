@@ -114,12 +114,14 @@ local function i_clever_tab()
     if vim.fn.pumvisible() ~= 0 then
         return "<C-n>"
     elseif vim.snippet.active({direction = 1}) then
-       vim.snippet.jump(1)
-       -- signature_help()
+        return "<cmd>lua vim.snippet.jump(1)<cr>"
     else
         local ls = require("luasnip")
         if ls.expandable() then
             vim.schedule(function() ls.expand() end)
+        elseif vim.snippet.active({ direction = 1 }) then
+            vim.snippet.jump(1)
+            -- signature_help()
         else
             -- restore indentation if line is blank
             local line = vim.api.nvim_get_current_line()
