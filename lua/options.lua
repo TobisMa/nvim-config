@@ -55,7 +55,7 @@ vim.opt.pumheight = 20
 vim.cmd[[set wildmode=noselect:lastused,full]]
 
 
-vim.opt.mps:append { '<:>', '=:;', '⟨:⟩', '⌈:⌉', '⌊:⌋', '»:«', '›:‹', '„:“', '„:”', '‚:‘', '‚:’'}
+vim.opt.mps:append { '<:>', '⟨:⟩', '⌈:⌉', '⌊:⌋', '»:«', '›:‹', '„:“', '„:”', '‚:‘', '‚:’'}
 
 vim.opt.spelllang = "en,de"
 vim.opt.path:append "**"
