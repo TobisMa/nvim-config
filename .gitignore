@@ -1,3 +1,4 @@
 *lock*.json
 lua/plugins/checkstyle.lua
 vim_be_good.lua
+.env*

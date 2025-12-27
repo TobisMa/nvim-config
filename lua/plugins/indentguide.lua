@@ -3,4 +3,5 @@ return {
     opts = {
         exclude_pattern = {"lazy", "help", "tutor", "man"}
     },
+    enabled=false
 }

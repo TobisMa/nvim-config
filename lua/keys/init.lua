@@ -1,0 +1,7 @@
+require("keys.insert")
+require("keys.lsp")
+require("keys.normal")
+require("keys.normalvisual")
+require("keys.select")
+require("keys.term")
+require("keys.visual")

@@ -46,7 +46,9 @@ require("lazy").setup({
     checker = { enabled = true, notify=false },
     performance = {
         rtp = {
-            disabled_plugins = {}
+            disabled_plugins = {
+                "netrwPlugin"
+            }
         }
     },
     dev = {
