@@ -7,27 +7,28 @@ return {
 
         local set = vim.keymap.set
 
-        set({'n', 'x'}, "<C-q>", mc.toggleCursor)
-        set({"n", "x"}, "<leader>n", function() mc.matchAddCursor(1) end)
-        set({"n", "x"}, "<leader>N", function() mc.matchAddCursor(-1) end)
-        set({"n", "v"}, "<leader>A", mc.matchAllAddCursors)
+        set({'n', 'x'}, "<leader>q", mc.toggleCursor)
+        set({"n", "x"}, "<C-n>", function() mc.matchAddCursor(1) end)
+        set({"n", "x"}, "<C-S-n>", function() mc.matchAddCursor(-1) end)
+        set("n", "<leader>m", mc.restoreCursors)
 
         mc.addKeymapLayer(function(layerSet)
             -- Select a different cursor as the main one.
             layerSet({"n", "x"}, "H", mc.prevCursor)
             layerSet({"n", "x"}, "L", mc.nextCursor)
 
-            set({"n", "x"}, "K", function() mc.lineAddCursor(-1) end)
-            set({"n", "x"}, "J", function() mc.lineAddCursor(1) end)
-            set({"n", "x"}, "<C-k>", function() mc.lineSkipCursor(-1) end)
-            set({"n", "x"}, "<C-j>", function() mc.lineSkipCursor(1) end)
+            layerSet({"n", "x"}, "<leader>x", mc.deleteCursor)
+            layerSet({"n", "x"}, "<C-q>", mc.toggleCursor)
 
-            set({"n", "x"}, "n", function() mc.matchAddCursor(1) end)
-            set({"n", "x"}, "N", function() mc.matchAddCursor(-1) end)
-            set({"n", "x"}, "<C-n>", function() mc.matchSkipCursor(1) end)
-            set({"n", "x"}, "<C-S-n>", function() mc.matchSkipCursor(-1) end)
+            layerSet("x", "S", mc.splitCursors)
+            layerSet("x", "M", mc.matchCursors)
 
-            layerSet({"n", "x"}, "<leader>q", mc.deleteCursor)
+            layerSet("x", "I", mc.insertVisual)
+            layerSet("x", "A", mc.appendVisual)
+
+            layerSet({"n", "x"}, "|", mc.alignCursors)
+
+            -- TODO: mc.operator (view :h multicursor-operator)
 
             layerSet("n", "<Esc>", function()
                 if not mc.cursorsEnabled() then
