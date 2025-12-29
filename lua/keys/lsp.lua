@@ -18,10 +18,3 @@ keys.nmap("gI", vim.lsp.buf.implementation)  -- shows implementations for the sy
 keys.nmap("gd", vim.lsp.buf.definition)  -- go to defintion of the symbol under the cursor (not declaration)
 keys.nmap("gD", vim.lsp.buf.declaration)  -- go to declaration of the symbol under the cursor (not definition)
 
--- quickfix
-keys.nmap("<leader>ql", "<cmd>cwindow<cr>")  -- open quickfix list if items exist (nothing happens if there are no items)
-keys.nmap("<leader>qP", "<cmd>cfirst<cr>")   -- go to first entry in the quickfix list
-keys.nmap("<leader>qp", "<cmd>cprevious<cr>")  -- go to previous quickfix list entry
-keys.nmap("<leader>qq", "<cmd>cc<cr>")  -- go to current quickfix list entry (last selected)
-keys.nmap("<leader>qn", "<cmd>cnext<cr>")  -- go to next quickfix list entry
-keys.nmap("<leader>qN", "<cmd>clast<cr>")  -- go to last entry in the quickfix list
