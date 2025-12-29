@@ -3,6 +3,8 @@ local keys = require("keys.util")
 keys.imap("<C-BS>", "<C-w>")
 keys.imap("<C-Del>", " <C-o>w<C-w><BS>")
 
+
+-- advanced key behaviours
 local function i_clever_tab()
     -- use tab to cycle through completions if possible, then try to complete the snippet, otherwise indent the current line
     if vim.fn.pumvisible() ~= 0 then
@@ -71,16 +73,24 @@ vim.keymap.set("i", "<esc>", ismart_escape, { expr = true })
 local function ismart_backspace()
     -- if only spaces are left before the cursor clear the whole line and then delete; restore indentation in the new line
     local line = vim.api.nvim_get_current_line()
-    if line:match("^%s+$") then
-        vim.schedule(function()
-            vim.api.nvim_del_current_line()
-            local cursor = vim.api.nvim_win_get_cursor(0)
-            vim.api.nvim_win_set_cursor(0, {math.max(1, cursor[1] - 1), vim.v.maxcol}) -- fix cursor position
-            keys.restore_indentation()
-        end)
-    else
-        return "<bs>"
+    local _, lnum, charPos, _ = unpack(vim.fn.getcharpos("."))
+
+    if line:sub(0, charPos - 1):match("^%s+$") then
+        -- only whitespace left from cursor
+        local prevIndent = vim.fn.indent(vim.fn.prevnonblank(lnum - 1))
+        local currentIndent = vim.fn.indent(".")
+        if prevIndent > currentIndent then
+            -- indentation of current line smaller than of the previous (nonblank) line
+            vim.api.nvim_feedkeys(
+                vim.api.nvim_replace_termcodes("<C-w><BS>", true, false, true),
+                "m",
+                false
+            )
+            vim.schedule(keys.restore_indentation)
+            return ""
+        end
+        -- remove indent instead of line
     end
+    return "<BS>"
 end
 vim.keymap.set("i", "<bs>", ismart_backspace, { expr = true })
-
