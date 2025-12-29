@@ -1,4 +1,5 @@
 return {
     "HiPhish/jinja.vim",
-    enabled=false
+    ft = { "jinja*", "html*" },
+    enabled = false
 }
