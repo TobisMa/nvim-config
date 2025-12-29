@@ -1,5 +1,8 @@
 local keys = require("keys.util")
 
+keys.imap("<C-BS>", "<C-w>")
+keys.imap("<C-Del>", " <C-o>w<C-w><BS>")
+
 local function i_clever_tab()
     -- use tab to cycle through completions if possible, then try to complete the snippet, otherwise indent the current line
     if vim.fn.pumvisible() ~= 0 then
