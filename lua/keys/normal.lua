@@ -1,6 +1,6 @@
 local keys = require("keys.util")
 
-keys.nmap("<leader>o", "<cmd>update<cr><cmd>source ~/.config/nvim/init.lua<cr>") -- source config
+keys.nmap("<leader>o", "<cmd>source ~/.config/nvim/init.lua<cr><cmd>echo 'Reloaded config at ' . expand('~/.config/nvim')<cr>") -- source config
 keys.nmap("<esc>", "<cmd>nohlsearch<CR>")                -- remove search highlighting
 keys.nmap("<leader>v", "ggVG")                           -- select whole file in visual line
 keys.nmap("<leader>k", "<cmd>m .-2<cr>")                 -- move current line up (by one line)
