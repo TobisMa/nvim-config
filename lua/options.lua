@@ -61,6 +61,7 @@ vim.opt.spelllang = "en,de"
 vim.opt.path:append "**"
 vim.opt.wildignore = {
     "__pycache__",
+    "target",
     ".git",
     "*.pyc",
     "*.exe",
@@ -70,7 +71,8 @@ vim.opt.wildignore = {
     "*.o",
     "*.bak",
     "*.pdf",
-    "*.db"
+    "*.db",
+    "*.~"
 }
 
 vim.schedule(function ()
