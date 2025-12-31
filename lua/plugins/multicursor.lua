@@ -10,6 +10,8 @@ return {
         set({'n', 'x'}, "<leader>q", mc.toggleCursor)
         set({"n", "x"}, "<C-n>", function() mc.matchAddCursor(1) end)
         set({"n", "x"}, "<C-S-n>", function() mc.matchAddCursor(-1) end)
+        set({"n", "x"}, "<C-A-n>", function() mc.matchSkipCursor(1) end)
+        set({"n", "x"}, "<C-M-S-n>", function() mc.matchSkipCursor(-1) end)
         set("n", "<leader>m", mc.restoreCursors)
 
         mc.addKeymapLayer(function(layerSet)
