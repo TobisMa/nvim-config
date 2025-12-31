@@ -75,6 +75,9 @@ vim.opt.wildignore = {
     "*.~"
 }
 
+vim.o.langmap = "Ü{ü[Ä}ä]ö@Ö*"
+vim.o.langremap = true  -- NOTE: may make problems with keymaps
+
 vim.schedule(function ()
     vim.opt.clipboard = 'unnamedplus'
 end)
