@@ -60,9 +60,9 @@ vim.opt.mps:append { '<:>', '⟨:⟩', '⌈:⌉', '⌊:⌋', '»:«', '›:‹',
 vim.opt.spelllang = "en,de"
 vim.opt.path:append "**"
 vim.opt.wildignore = {
-    "__pycache__",
-    "target",
-    ".git",
+    "*/__pycache__/*",
+    "*/target/*",
+    "*/.git/*",
     "*.pyc",
     "*.exe",
     "*.so",
@@ -74,7 +74,7 @@ vim.opt.wildignore = {
     "*.pdf",
     "*.db",
     "*.s",
-    "*.~"
+    "*~"
 }
 
 vim.o.langmap = "Ü{ü[Ä}ä]ö@Ö*"
