@@ -1,2 +1,2 @@
-vim.cmd[[setlocal makeprg=cargo\ build]]
+vim.cmd[[compiler cargo]]
 

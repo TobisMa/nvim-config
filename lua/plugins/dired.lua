@@ -23,7 +23,7 @@ return {
 
     },
     keys = {
-        {"<TAB>", "<cmd>Dired<cr>", {desc = "Opens dired.nvim filebrowser"}},
+        {"<S-TAB>", "<cmd>Dired<cr>", {desc = "Opens dired.nvim filebrowser"}},
         {"<leader>a", "<cmd>vs | Dired<cr>", {desc = "Opens dired.nvim filebrowser in vertical split right"}},
     }
 }

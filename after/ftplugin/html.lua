@@ -1,1 +1,0 @@
--- vim.cmd[[ set completeopt-=noselect ]]

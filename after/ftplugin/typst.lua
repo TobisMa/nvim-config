@@ -1,4 +1,4 @@
-
+-- makeprg is set by LSP server tinymist
 vim.cmd[[
     setlocal spell
     set formatoptions+=t

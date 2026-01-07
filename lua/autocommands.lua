@@ -30,36 +30,6 @@ vim.api.nvim_create_autocmd("InsertEnter", {
 --     end,
 -- })
 
--- store nvim session
-vim.api.nvim_create_autocmd("VimLeavePre", {
-    group = vim.api.nvim_create_augroup("store-session", { clear= true}),
-    callback = function ()
-        if not vim.v.dying then
-            vim.cmd[[mksession .session.vim]]
-        elseif #vim.api.nvim_list_bufs() >= 15 then
-            local res = vim.fn.input("Save session (y/N):")
-            if res == "y" then
-                vim.cmd[[mksession! .session.vim]]
-            end
-        end
-    end
-})
-
--- load nvim session
-vim.api.nvim_create_autocmd("UIEnter", {
-    group = vim.api.nvim_create_augroup("load-session", { clear= true}),
-    callback = function ()
-        if vim.fn.filereadable(vim.fn.expand(".session.vim")) == 1 then
-            local res = vim.fn.input("Load session (y/N):")
-            if res == "y" then
-                vim.schedule(function ()
-                    vim.cmd[[source .session.vim]]
-                    vim.cmd[[silent! !rm .session.vim]]
-                end)
-            end
-        end
-    end
-})
 
 -- keep cursor position in file
 vim.api.nvim_create_autocmd("BufReadPost", {

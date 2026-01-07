@@ -67,11 +67,13 @@ vim.opt.wildignore = {
     "*.exe",
     "*.so",
     "*.a",
+    "*.d",
     "*.class",
     "*.o",
     "*.bak",
     "*.pdf",
     "*.db",
+    "*.s",
     "*.~"
 }
 
